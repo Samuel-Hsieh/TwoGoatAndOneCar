@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TwoGoatAndOneCar</string>
+    <string name="action_settings">Settings</string>
+    <string name="context">蒙提霍爾問題</string>
+    <string name="doors">門</string>
+    <string name="Plot1">
+        你好啊年輕人，我是Android機器人，
+        跟你玩一個遊戲...</string>
+    <string name="Plot2">
+        我身後有三道門，其中一扇後面有一輛車，
+        其餘兩扇後面則是山羊，如果你成功猜對車子，
+        我就讓你帶回家...
+    </string>
+    <string name="Plot3">
+        現在，是做選擇的時候了...</string>
+    <string name="Plot4">
+        嗯...給你一個機會，我告訴你第%s道門
+        其實是山羊，再讓你選擇一次，你會選？</string>
+    <string name="Plot_Winner">
+        可...可惡！讓你猜中了！
+        恭喜你獲得車子！！</string>
+    <string name="Plot_Loser">
+        可惜啊～！年輕人終究是年輕人！
+        還太淺了！</string>
+</resources>
