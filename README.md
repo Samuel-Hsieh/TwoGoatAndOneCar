@@ -3,6 +3,8 @@
 
 蒙提霍爾問題的簡易遊戲
 
+<img src="https://github.com/Samuel-Hsieh/TwoGoatAndOneCar/blob/master/Screenshot_1504706364.png" width="350"/>
+
 <h2>參考來源</h2>
 
 [蒙提霍爾問題](https://zh.wikipedia.org/wiki/%E8%92%99%E6%8F%90%E9%9C%8D%E7%88%BE%E5%95%8F%E9%A1%8C)
