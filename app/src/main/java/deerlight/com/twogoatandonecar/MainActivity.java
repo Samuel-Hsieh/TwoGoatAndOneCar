@@ -1,9 +1,8 @@
 package deerlight.com.twogoatandonecar;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -20,17 +19,17 @@ import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity {
-    //    Button door1, door2, door3;
-    LinearLayout game;
-    ImageView door1, door2, door3;
-    TextView plotText;
-    FloatingActionButton fab;
-    FrameLayout door1_bg, door2_bg, door3_bg;
-    List<Integer> tag_array = new ArrayList<>();
-    String[] doorTag = new String[3];
-    Random random = new Random();
-    int Count = 0;
-    int PlotCount = 0;
+
+    private LinearLayout game;
+    private ImageView door1, door2, door3;
+    private TextView plotText;
+    private FloatingActionButton fab;
+    private FrameLayout door1_bg, door2_bg, door3_bg;
+    private String[] doorTag = new String[3];
+    private int Count = 0;
+    private int PlotCount = 0;
+    private static final String GOAT = "山羊";
+    private static final String CAR = "車";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +64,9 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         initData();
                         Random();
-                        ArrayList<ImageView> arrayList = new ArrayList<>();
-                        arrayList.add(0, door1);
-                        arrayList.add(1, door2);
-                        arrayList.add(2, door3);
-                        for (int i = 0; i < arrayList.size(); i++) {
-                            arrayList.get(i).setImageResource(R.drawable.ic_door);
-                        }
-                        Snackbar.make(view, "刷新", Snackbar.LENGTH_LONG).show();
+                        door1.setImageResource(R.drawable.ic_door);
+                        door2.setImageResource(R.drawable.ic_door);
+                        door3.setImageResource(R.drawable.ic_door);
                         break;
                 }
 
@@ -87,18 +81,17 @@ public class MainActivity extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.door1: {
                         if (Count == 0) {
-                            if (!(doorTag[1].equals("羊"))) {
-                                door3.setImageResource(getImage(doorTag[2]));
-                                plotText.setText(String.format(getString(R.string.Plot4), "3"));
-                            } else {
+                            if (doorTag[1].equals(GOAT)) {
                                 door2.setImageResource(getImage(doorTag[1]));
                                 plotText.setText(String.format(getString(R.string.Plot4), "2"));
+                            } else {
+                                door3.setImageResource(getImage(doorTag[2]));
+                                plotText.setText(String.format(getString(R.string.Plot4), "3"));
                             }
-                            door1_bg.setBackgroundColor(Color.parseColor("#FF8888"));
-                        }
-                        if (Count == 1) {
+                            door1_bg.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Selected));
+                        } else {
                             door1.setImageResource(getImage(doorTag[0]));
-                            if (doorTag[0].equals("車")) {
+                            if (doorTag[0].equals(CAR)) {
                                 plotText.setText(getString(R.string.Plot_Winner));
                             } else {
                                 plotText.setText(getString(R.string.Plot_Loser));
@@ -109,18 +102,17 @@ public class MainActivity extends AppCompatActivity {
                     break;
                     case R.id.door2: {
                         if (Count == 0) {
-                            if (!(doorTag[0].equals("羊"))) {
+                            if (doorTag[2].equals(GOAT)) {
                                 door3.setImageResource(getImage(doorTag[2]));
                                 plotText.setText(String.format(getString(R.string.Plot4), "3"));
                             } else {
                                 door1.setImageResource(getImage(doorTag[0]));
                                 plotText.setText(String.format(getString(R.string.Plot4), "1"));
                             }
-                            door2_bg.setBackgroundColor(Color.parseColor("#FF8888"));
-                        }
-                        if (Count == 1) {
+                            door2_bg.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Selected));
+                        } else {
                             door2.setImageResource(getImage(doorTag[1]));
-                            if (doorTag[1].equals("車")) {
+                            if (doorTag[1].equals(CAR)) {
                                 plotText.setText(getString(R.string.Plot_Winner));
                             } else {
                                 plotText.setText(getString(R.string.Plot_Loser));
@@ -131,18 +123,17 @@ public class MainActivity extends AppCompatActivity {
                     break;
                     case R.id.door3: {
                         if (Count == 0) {
-                            if (!(doorTag[0].equals("羊"))) {
-                                door2.setImageResource(getImage(doorTag[1]));
-                                plotText.setText(String.format(getString(R.string.Plot4), "2"));
-                            } else {
+                            if (doorTag[0].equals(GOAT)) {
                                 door1.setImageResource(getImage(doorTag[0]));
                                 plotText.setText(String.format(getString(R.string.Plot4), "1"));
+                            } else {
+                                door2.setImageResource(getImage(doorTag[1]));
+                                plotText.setText(String.format(getString(R.string.Plot4), "2"));
                             }
-                            door3_bg.setBackgroundColor(Color.parseColor("#FF8888"));
-                        }
-                        if (Count == 1) {
+                            door3_bg.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Selected));
+                        } else {
                             door3.setImageResource(getImage(doorTag[2]));
-                            if (doorTag[2].equals("車")) {
+                            if (doorTag[2].equals(CAR)) {
                                 plotText.setText(getString(R.string.Plot_Winner));
                             } else {
                                 plotText.setText(getString(R.string.Plot_Loser));
@@ -194,40 +185,36 @@ public class MainActivity extends AppCompatActivity {
         door2.setEnabled(false);
         door3.setEnabled(false);
         fab.setImageResource(R.drawable.ic_next);
-        door1_bg.setBackgroundColor(Color.parseColor("#888888"));
-        door2_bg.setBackgroundColor(Color.parseColor("#888888"));
-        door3_bg.setBackgroundColor(Color.parseColor("#888888"));
+        door1_bg.setBackgroundColor(ContextCompat.getColor(this, R.color.unSelected));
+        door2_bg.setBackgroundColor(ContextCompat.getColor(this, R.color.unSelected));
+        door3_bg.setBackgroundColor(ContextCompat.getColor(this, R.color.unSelected));
+        door3_bg.setBackgroundColor(ContextCompat.getColor(this, R.color.unSelected));
         plotText.setText(getString(R.string.Plot1));
     }
 
     private void Random() {
-        tag_array.clear();
-        int tag;
-        while (tag_array.size() < 3) {
-            tag = random.nextInt(3);
-            if (tag_array.contains(tag)) {
-                continue;
+        Random random = new Random();
+        List<Integer> list = new ArrayList<>();
+        list.add(0);
+        list.add(1);
+        list.add(2);
+
+        for (int i = 0; i < 3; i++) {
+            int tag = random.nextInt(list.size());
+            if (list.get(tag).equals(0) || list.get(tag).equals(1)) {
+                doorTag[i] = GOAT;
             } else {
-                tag_array.add(tag);
+                doorTag[i] = CAR;
             }
-        }
-        for (int i = 0; i < doorTag.length; i++) {
-            if (tag_array.get(i).equals(0) || tag_array.get(i).equals(1)) {
-                doorTag[i] = "羊";
-            } else {
-                doorTag[i] = "車";
-            }
+            list.remove(tag);
         }
     }
 
     private int getImage(String doorTag) {
-        switch (doorTag) {
-            case "羊":
-                return R.drawable.ic_goat;
-            case "車":
-                return R.drawable.ic_car;
-            default:
-                return R.drawable.ic_door;
+        if (doorTag.equals(GOAT)) {
+            return R.drawable.ic_goat;
         }
+        return R.drawable.ic_car;
     }
+
 }
